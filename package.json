@@ -1,8 +1,8 @@
 {
   "name": "spotify_clone",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Full-featured Spotify clone backend API",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon server.js",

@@ -83,7 +83,46 @@ npm start
 
 ---
 
+## ☁️ Deployment Guide (Get your Deployed Live Link)
+
+### Deploying to Render (Recommended & Free)
+
+1. **Push your code to GitHub** (see the GitHub section below).
+2. Go to [Render.com](https://render.com) and sign up / log in with your GitHub account.
+3. Click **"New +"** and choose **"Web Service"**.
+4. Select your `spotify-clone` repository.
+5. Fill in the service settings:
+   - **Name**: `spotify-clone-api` (or your preferred name)
+   - **Region**: Choose the closest region (e.g., Singapore, Frankfurt, Oregon)
+   - **Branch**: `main`
+   - **Runtime**: `Node`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Instance Type**: `Free`
+6. Under **Environment Variables**, add the following keys from your `.env`:
+   - `NODE_ENV`: `production`
+   - `PORT`: `10000`
+   - `MONGO_URI`: `your_mongodb_atlas_connection_string`
+   - `JWT_SECRET`: `your_secure_random_jwt_secret`
+   - `IMAGEKIT_PUBLIC_KEY`: `your_imagekit_public_key`
+   - `IMAGEKIT_PRIVATE_KEY`: `your_imagekit_private_key`
+   - `IMAGEKIT_URL_ENDPOINT`: `your_imagekit_url_endpoint`
+7. Click **"Create Web Service"**.
+8. Render will build and deploy your app. Once deployed, your live URL will be displayed at the top:
+   ```
+   https://<your-app-name>.onrender.com
+   ```
+9. Test your deployed link by opening `https://<your-app-name>.onrender.com/` in your browser. You will see the server status JSON!
+
+---
+
 ## 📡 API Endpoints Reference
+
+### 🌐 System & Health
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `GET` | `/` | Public | Live service status & endpoint directory |
+| `GET` | `/health` | Public | Healthcheck and uptime probe |
 
 ### 🔐 Authentication (`/api/auth`)
 | Method | Endpoint | Access | Description |

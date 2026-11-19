@@ -37,10 +37,12 @@ async function registerUser(req, res) {
             role: user.role,
         }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -92,10 +94,12 @@ async function loginUser(req, res) {
             role: user.role,
         }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -144,9 +148,11 @@ async function getMe(req, res) {
 }
 
 async function logoutUser(req, res) {
+    const isProduction = process.env.NODE_ENV === "production";
     res.clearCookie("token", {
         httpOnly: true,
-        sameSite: "lax"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
     });
     res.status(200).json({ message: "User logged out successfully" });
 }
